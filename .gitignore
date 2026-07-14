@@ -1,0 +1,9 @@
+data/
+downloads/
+temp/
+logs/
+__pycache__/
+*.pyc
+.scraper.pid
+*.zip
+*.db

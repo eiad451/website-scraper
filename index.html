@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Website Scraper Pro - by eiad451</title>
+<meta name="description" content="Website Scraper Pro - أداة سحب المواقع المتقدمة">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a1a;--card:rgba(255,255,255,.03);--border:rgba(255,255,255,.06);--text:#fff;--text2:rgba(255,255,255,.5);--text3:rgba(255,255,255,.3);--cyan:#00d2ff;--blue:#3a7bd5;--purple:#7c3aed;--pink:#ec4899;--green:#00b894;--grad:linear-gradient(135deg,#00d2ff,#3a7bd5,#7c3aed);--radius:16px}
+body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+.bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bg::before{content:'';position:absolute;width:600px;height:600px;background:rgba(0,210,255,.08);border-radius:50%;filter:blur(120px);top:-200px;right:-200px;animation:fl 20s infinite alternate}
+.bg::after{content:'';position:absolute;width:500px;height:500px;background:rgba(124,58,237,.06);border-radius:50%;filter:blur(120px);bottom:-150px;left:-150px;animation:fl 20s -7s infinite alternate}
+@keyframes fl{0%{transform:translate(0,0)}100%{transform:translate(30px,-30px)}}
+.container{max-width:960px;margin:0 auto;padding:20px;position:relative;z-index:1}
+.header{text-align:center;padding:60px 30px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:24px;backdrop-filter:blur(20px)}
+.header h1{font-size:2.5rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.header .sub{color:var(--text2);font-size:1rem;margin-bottom:16px}
+.header .badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;background:rgba(0,210,255,.08);border:1px solid rgba(0,210,255,.15);border-radius:100px;font-size:.85rem;color:var(--cyan)}
+.dot{width:8px;height:8px;background:var(--cyan);border-radius:50%;display:inline-block;animation:pl 2s infinite}
+@keyframes pl{0%,100%{opacity:1}50%{opacity:.3}}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:20px;backdrop-filter:blur(20px);transition:.3s}
+.card:hover{border-color:rgba(0,210,255,.15);box-shadow:0 0 60px rgba(0,210,255,.06)}
+.card h2{font-size:1.2rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.card h2 .ic{width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:rgba(0,210,255,.1);border:1px solid rgba(0,210,255,.15);border-radius:10px;font-size:16px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:640px){.grid-3{grid-template-columns:1fr}}
+.feature{padding:16px;text-align:center;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:12px;transition:.3s;font-size:.88rem;color:var(--text2)}
+.feature:hover{border-color:rgba(255,255,255,.08);transform:translateY(-2px)}
+.feature .fi{font-size:24px;margin-bottom:6px}
+.file-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px}
+.file-item{padding:10px 14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:8px;font-size:.82rem;color:var(--text2);direction:ltr;text-align:left;font-family:monospace;transition:.2s}
+.file-item:hover{background:rgba(255,255,255,.04);border-color:var(--cyan)}
+.file-item .ext{color:var(--cyan);font-weight:600}
+.copyright{text-align:center;padding:30px;color:var(--text3);font-size:.82rem;border-top:1px solid var(--border);margin-top:30px}
+.copyright strong{color:var(--cyan)}
+.copyright a{color:var(--cyan);text-decoration:none}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:var(--grad);color:#fff;border:none;border-radius:12px;font-size:.9rem;font-weight:600;cursor:pointer;text-decoration:none;transition:.3s;font-family:inherit}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,210,255,.25)}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--text2)}
+.btn-outline:hover{background:rgba(255,255,255,.04);border-color:rgba(0,210,255,.2);color:var(--text)}
+.btn-group{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:16px}
+.fade-in{animation:fi .5s ease}
+@keyframes fi{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.stats{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:16px 0}
+.stat{text-align:center;padding:16px 24px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:12px;min-width:100px}
+.stat .num{font-size:1.6rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat .lbl{font-size:.75rem;color:var(--text3);margin-top:2px}
+code{background:rgba(0,210,255,.08);padding:2px 6px;border-radius:4px;font-size:.82rem;color:var(--cyan)}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="container">
+
+<div class="header fade-in">
+  <div style="font-size:3rem;margin-bottom:12px">🕵️</div>
+  <h1>Website Scraper Pro</h1>
+  <p class="sub">أداة سحب وتحليل المواقع المتقدمة — Website &amp; APK &amp; Telegram Scraper</p>
+  <div class="badge"><span class="dot"></span> PHP + Python + JavaScript</div>
+  <div class="stats">
+    <div class="stat"><span class="num">18+</span><span class="lbl">ملف</span></div>
+    <div class="stat"><span class="num">PHP</span><span class="lbl">Backend</span></div>
+    <div class="stat"><span class="num">Py</span><span class="lbl">Scripts</span></div>
+  </div>
+</div>
+
+<div class="card fade-in">
+  <h2><span class="ic">🚀</span> عن المشروع</h2>
+  <p style="color:var(--text2);margin-bottom:12px;font-size:.92rem">
+    <strong>Website Scraper Pro</strong> — أداة متكاملة لسحب المواقع بالكامل، تحليل ملفات APK، سحب قنوات التلغرام، فحص المسارات المخفية، لوحات الإدارة، وقواعد البيانات. مبنية بـ <code>PHP</code> مع واجهة أمامية أنيقة.
+  </p>
+  <div class="btn-group">
+    <a class="btn" href="index.php">🚀 الدخول للمشروع</a>
+  </div>
+</div>
+
+<div class="card fade-in">
+  <h2><span class="ic">✨</span> المميزات</h2>
+  <div class="grid-3">
+    <div class="feature"><div class="fi">🌐</div>سحب مواقع كامل<br><small style="color:var(--text3)">HTML + CSS + JS + صور</small></div>
+    <div class="feature"><div class="fi">📱</div>تحليل APK<br><small style="color:var(--text3)">فك تجميع + ذكاء اصطناعي</small></div>
+    <div class="feature"><div class="fi">✈️</div>سحب تلغرام<br><small style="color:var(--text3)">بوت API أو قنوات عامة</small></div>
+    <div class="feature"><div class="fi">🔍</div>مسارات مخفية<br><small style="color:var(--text3)">Hidden + Admin + DB scan</small></div>
+    <div class="feature"><div class="fi">🛡️</div>تجاوز WAF<br><small style="color:var(--text3)">Cloudflare bypass</small></div>
+    <div class="feature"><div class="fi">📦</div>تصدير ZIP<br><small style="color:var(--text3)">تحميل مباشر</small></div>
+    <div class="feature"><div class="fi">👥</div>نظام مستخدمين<br><small style="color:var(--text3)">اشتراكات + عملات</small></div>
+    <div class="feature"><div class="fi">⚙️</div>لوحة إدارة<br><small style="color:var(--text3)">تحكم كامل</small></div>
+    <div class="feature"><div class="fi">🧠</div>AI تحليل<br><small style="color:var(--text3)">Gemini API</small></div>
+  </div>
+</div>
+
+<div class="card fade-in">
+  <h2><span class="ic">📁</span> هيكل المشروع</h2>
+  <div class="file-list">
+    <div class="file-item"><span class="ext">index.html</span> — الصفحة الرئيسية (Standalone)</div>
+    <div class="file-item"><span class="ext">index.php</span> — الصفحة الرئيسية (PHP Login)</div>
+    <div class="file-item"><span class="ext">style.css</span> — ملف التنسيقات</div>
+    <div class="file-item"><span class="ext">script.js</span> — أكواد JavaScript</div>
+    <div class="file-item"><span class="ext">config.php</span> — إعدادات السيرفر</div>
+    <div class="file-item"><span class="ext">db.php</span> — قواعد البيانات SQLite</div>
+    <div class="file-item"><span class="ext">functions.php</span> — الدوال المساعدة</div>
+    <div class="file-item"><span class="ext">scraper.php</span> — محرك السحب (SiteScraper)</div>
+    <div class="file-item"><span class="ext">api.php</span> — واجهة API شاملة</div>
+    <div class="file-item"><span class="ext">login.php</span> — تسجيل الدخول</div>
+    <div class="file-item"><span class="ext">register.php</span> — إنشاء حساب</div>
+    <div class="file-item"><span class="ext">admin.php</span> — لوحة الإدارة</div>
+    <div class="file-item"><span class="ext">telegram_scraper.php</span> — سحب تلغرام</div>
+    <div class="file-item"><span class="ext">apk_analyzer.php</span> — محلل APK</div>
+    <div class="file-item"><span class="ext">bot_scraper.py</span> — بوت سحب (Python)</div>
+    <div class="file-item"><span class="ext">cloudscraper_helper.py</span> — Cloudflare bypass</div>
+    <div class="file-item"><span class="ext">server.sh</span> — سكريبت التشغيل</div>
+    <div class="file-item"><span class="ext">download.php</span> — معالج التحميل</div>
+  </div>
+</div>
+
+<div class="copyright">
+  <p>© 2026 <strong>eiad451</strong> — Website Scraper Pro v4.0</p>
+  <p style="margin-top:6px;font-size:.75rem">جميع الحقوق محفوظة</p>
+  <p style="margin-top:8px">
+    <a href="https://github.com/eiad451">github.com/eiad451</a>
+  </p>
+</div>
+
+</div>
+</body>
+</html>
